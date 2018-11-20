@@ -30,7 +30,7 @@ namespace azure_functions_talk
             .Select(a => JsonConvert.DeserializeObject<Dounut>(a.Result))
             .Select(a => a.Flavor)
             .ToList();
-            return new OkObjectResult("Your dounuts sir!" + String.Join(' ', dozen));
+            return new OkObjectResult("Your dounuts sir! " + String.Join(' ', dozen));
             }
             catch(Exception e) {
                 log.LogError(e, "Error processing!");
