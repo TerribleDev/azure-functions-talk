@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using System.Collections.Generic;
+using System.Threading;
 
 namespace azure_functions_talk
 {
@@ -19,6 +20,7 @@ namespace azure_functions_talk
             [HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = "/make")] HttpRequest req,
             ILogger log)
         {
+            Thread.Sleep(new Random().Next(8, 25));
             return new OkObjectResult(new Dounut());
         }
     }
