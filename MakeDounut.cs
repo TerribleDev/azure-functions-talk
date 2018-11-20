@@ -17,7 +17,7 @@ namespace azure_functions_talk
     {
         [FunctionName("MakeDounut")]
         public static async Task<IActionResult> Run(
-            [HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = "/make")] HttpRequest req,
+            [HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = "make")] HttpRequest req,
             ILogger log)
         {
             Thread.Sleep(new Random().Next(8, 25));
