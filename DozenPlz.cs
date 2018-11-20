@@ -22,13 +22,21 @@ namespace azure_functions_talk
             ILogger log)
         {
             var baseUrl = Environment.GetEnvironmentVariable("baseUrl");
-            var tasks = Enumerable.Range(0, 12).Select(a => client.GetStringAsync(baseUrl + "/make"));
+            try
+            {
+                var tasks = Enumerable.Range(0, 12).Select(a => client.GetStringAsync(baseUrl + "/api/make"));
             await Task.WhenAll(tasks);
             var dozen = tasks
             .Select(a => JsonConvert.DeserializeObject<Dounut>(a.Result))
             .Select(a => a.Flavor)
             .ToList();
             return new OkObjectResult("Your dounuts sir!" + String.Join(' ', dozen));
+            }
+            catch(Exception e) {
+                log.LogError(e, "Error processing!");
+                throw;
+            }
+            
         }
     }
 }
