@@ -18,7 +18,7 @@ namespace azure_functions_talk
         
         [FunctionName("DozenPlz")]
         public static async Task<IActionResult> Run(
-            [HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = "dozen")] HttpRequest req,
+            [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = "dozen")] HttpRequest req,
             ILogger log)
         {
             var baseUrl = Environment.GetEnvironmentVariable("baseUrl");
