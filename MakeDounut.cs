@@ -20,7 +20,7 @@ namespace azure_functions_talk
             [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = "make")] HttpRequest req,
             ILogger log)
         {
-            Thread.Sleep(new Random().Next(8, 25));
+            await Task.Delay(new Random().Next(8, 25));
             return new OkObjectResult(new Dounut());
         }
     }
