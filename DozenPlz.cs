@@ -24,8 +24,11 @@ namespace azure_functions_talk
             var baseUrl = Environment.GetEnvironmentVariable("baseUrl");
             var tasks = Enumerable.Range(0, 12).Select(a => client.GetStringAsync(baseUrl + "/make"));
             await Task.WhenAll(tasks);
-            var dozen = tasks.Select(a => JsonConvert.DeserializeObject<Dounut>(a.Result)).ToList();
-            return new OkObjectResult(dozen);
+            var dozen = tasks
+            .Select(a => JsonConvert.DeserializeObject<Dounut>(a.Result))
+            .Select(a => a.Flavor)
+            .ToList();
+            return new OkObjectResult("Your dounuts sir!" + String.Join(' ', dozen));
         }
     }
 }
