@@ -16,12 +16,12 @@ namespace azure_functions_talk
     public static class MakeDounut
     {
         [FunctionName("MakeDounut")]
-        public static async Task<IActionResult> Run(
+        public static async Task<Dounut> Run(
             [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = "make")] HttpRequest req,
             ILogger log)
         {
             await Task.Delay(new Random().Next(8, 25));
-            return new OkObjectResult(new Dounut());
+            return new Dounut();
         }
     }
 }
