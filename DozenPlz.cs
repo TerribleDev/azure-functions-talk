@@ -24,11 +24,11 @@ namespace azure_functions_talk
             var baseUrl = Environment.GetEnvironmentVariable("baseUrl");
             try
             {
-                var tasks = Enumerable.Range(0, 12).Select(a => client.GetStringAsync(baseUrl + "/api/make"));
-            await Task.WhenAll(tasks);
+            var tasks = Enumerable.Range(0, 12).Select(a => {
+                return new CompleteDounut() { Id = Guid.NewGuid().ToString(), Topping = Topper.GetTopping()  };
+            });
             var dozen = tasks
-            .Select(a => JsonConvert.DeserializeObject<Dounut>(a.Result))
-            .Select(a => a.Flavor)
+            .Select(a => a.Topping)
             .ToList();
             return new OkObjectResult("Your dounuts sir! " + String.Join(' ', dozen));
             }
