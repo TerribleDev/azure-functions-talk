@@ -29,7 +29,7 @@ namespace azure_functions_talk
             ILogger log)
         {
             await Task.Delay(50);
-            return new OkObjectResult(new CompleteDounut() { Topping = GetTopping() });
+            return new OkObjectResult(new CompleteDounut() { Topping = GetTopping(), Id = req.Id, Done = req.Done  });
         }
     }
 }
